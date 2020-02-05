@@ -1,0 +1,20 @@
+{
+    "name": "scav-cli",
+    "version": "1.0.0",
+    "description": "a scaffold to init a project with vue",
+    "main": "index.js",
+    "bin": {
+        "scav": "bin/scav.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "chalk": "^3.0.0",
+        "child_process": "^1.0.2",
+        "commander": "^4.1.1",
+        "inquirer": "^7.0.4"
+    },
+    "author": "qzem",
+    "license": "ISC"
+}
