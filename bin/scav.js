@@ -25,6 +25,14 @@ program
         require('../command/init.js')()
     })
 
+program
+    .command('test')
+    .description('console the current path')
+    .alias('t')
+    .action(()=>{
+        console.log(process.cwd()) // process.cwd()为当前执行命令的地方
+    })
+
 // program.parse(arguments)会处理参数，没有被使用的选项会被存放在program.args数组中
 program.parse(process.argv)
 

@@ -1,6 +1,6 @@
 {
     "name": "scav-cli",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "a scaffold to init a project with vue",
     "main": "index.js",
     "bin": {
@@ -13,6 +13,7 @@
         "chalk": "^3.0.0",
         "child_process": "^1.0.2",
         "commander": "^4.1.1",
+        "ejs": "^3.0.1",
         "inquirer": "^7.0.4"
     },
     "author": "qzem",
