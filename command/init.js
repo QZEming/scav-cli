@@ -25,6 +25,23 @@ module.exports = ()=>{
         message:'use vuex?',
         name:'useVuex',
         default:false
+    },{
+        type:'list',
+        message:'the UI fragment:',
+        name:'UIfrag',
+        choices:[
+            {name:'no UI fragment',value:'none'},
+            {name:'element-ui',value:'eleUI'}
+        ]
+    },{
+        type:'list',
+        message:'the css preprocessing language:',
+        name:'cssPrep',
+        choices:[
+            {name:'no preprocess',value:'none'},
+            {name:'less',value:'less'},
+            {name:'sass',value:'sass'}
+        ]
     }]
     inquirer.prompt(prompts).then(answer=>{ // 通过用户的输入进行各种操作
         console.log(chalk.green('开始初始化文件\n'))
@@ -47,7 +64,7 @@ module.exports = ()=>{
                     fs.writeFileSync(`${process.cwd()}/${answer.projectName}/src/store/${val}`,fileData)
                 })
             }
-            let files = ['public/index.html','package-lock.json','package.json']
+            let files = ['public/index.html','src/App.vue','src/main.js','package-lock.json','package.json']
             files.forEach((val,index)=>{
                 ejs.renderFile(`${answer.projectName}/${val}`,answer,(err,str)=>{
                     fs.writeFile(`${answer.projectName}/${val}`,str,()=>{

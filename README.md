@@ -1,6 +1,6 @@
 # scav-cli
 用于从github上拉取模板到本地的脚手架工具
-
+可在初始化时配置vuex，UI框架，css预处理语言
 使用
 ```
 npm i scav-cli -g
@@ -17,16 +17,12 @@ scav i
 ```
 来初始化项目
 
-## 执行示例  
-
-使用vuex的示例  
-![使用vuex的示例](executeImg/withVuex.jpg)
-
-不使用vuex的示例  
-![不用vuex的示例](executeImg/noVuex.jpg)
-
 # 版本更新
----
+## 2.1.0
+增加对App.vue的ejs模板处理
+增加对UI框架的配置
+增加对css预处理语言的配置
+
 ## 2.0.0
 增加了ejs的模板渲染，修改index.html，package.json等文件的相关内容
 增加了是否启用vuex的选择
