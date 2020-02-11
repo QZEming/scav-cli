@@ -1,6 +1,6 @@
 # scav-cli
-用于从github上拉取模板到本地的脚手架工具
-可在初始化时配置vuex，UI框架，css预处理语言
+用于从github上拉取模板到本地的脚手架工具  
+可在初始化时配置vuex，UI框架，css预处理语言  
 使用
 ```
 npm i scav-cli -g
@@ -17,7 +17,12 @@ scav i
 ```
 来初始化项目
 
+使用scav avxf来添加vuex相关的模板文件到store文件夹下的modules文件夹下
+
 # 版本更新
+## 2.1.2
+增加了vue-router的配置
+
 ## 2.1.1
 增加了advx指令，用于添加vuex模板文件
 

@@ -24,7 +24,12 @@ module.exports = ()=>{
         type:'confirm',
         message:'use vuex?',
         name:'useVuex',
-        default:false
+        default:true
+    },{
+        type:'confirm',
+        message:'use vue router?',
+        name:'useVueRouter',
+        default:true
     },{
         type:'list',
         message:'the UI fragment:',
@@ -54,6 +59,7 @@ module.exports = ()=>{
                 console.log(chalk.red('拷贝文件失败'))
                 process.exit()
             }
+            // 当配置vuex时进行的操作
             if(answer.useVuex){
                 fs.mkdirSync(`${process.cwd()}/${answer.projectName}/src/store`)
                 fs.mkdirSync(`${process.cwd()}/${answer.projectName}/src/store/modules`)
@@ -63,26 +69,40 @@ module.exports = ()=>{
                     let fileData = fs.readFileSync(__dirname+`/../templates/vuex/${val}`)
                     fs.writeFileSync(`${process.cwd()}/${answer.projectName}/src/store/${val}`,fileData)
                 })
+                console.log(chalk.green('vuex配置完成'))
+            }
+            // 当配置vue-router时进行的操作
+            if(answer.useVueRouter){
+                fs.mkdirSync(`${process.cwd()}/${answer.projectName}/src/router`)
+                let moduleFiles = ['router/index.js']
+                moduleFiles.forEach(val=>{
+                    let fileData = fs.readFileSync(__dirname+`/../templates/vue-router/${val}`)
+                    fs.writeFileSync(`${process.cwd()}/${answer.projectName}/src/${val}`,fileData)
+                })
+                console.log(chalk.green('vue-router配置完成'))
             }
             let files = ['public/index.html','src/App.vue','src/main.js','package-lock.json','package.json']
-            files.forEach((val,index)=>{
-                ejs.renderFile(`${answer.projectName}/${val}`,answer,(err,str)=>{
-                    fs.writeFile(`${answer.projectName}/${val}`,str,()=>{
-                        if(index===files.length-1){
-                            exec(`cd ${answer.projectName} && npm i`,(err,stdout,stderr)=>{
-                                console.log(chalk.green('依赖包下载完毕'))
-                                if (error) { // 当有错误时打印出错误并退出操作
-                                    console.log(chalk.red('拷贝文件失败'))
-                                    process.exit()
-                                }
-                                console.log(chalk.green('初始化完成'))
-                                process.exit() // 退出这次命令行操作
-                            })
-                        }
+            new Promise(resolve=>{
+                files.forEach((val,index)=>{
+                    ejs.renderFile(`${answer.projectName}/${val}`,answer,(err,str)=>{
+                        fs.writeFile(`${answer.projectName}/${val}`,str,()=>{
+                            if(index===files.length-1){
+                                resolve()
+                            }
+                        })
                     })
                 })
+            }).then(()=>{
+                exec(`cd ${answer.projectName} && npm i`,(err,stdout,stderr)=>{
+                    console.log(chalk.green('依赖包下载完毕'))
+                    if (error) { // 当有错误时打印出错误并退出操作
+                        console.log(chalk.red('拷贝文件失败'))
+                        process.exit()
+                    }
+                    console.log(chalk.green('初始化完成'))
+                    process.exit() // 退出这次命令行操作
+                })
             })
-            
         })
     })
 }
